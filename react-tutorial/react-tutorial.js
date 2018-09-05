@@ -38,6 +38,7 @@ class Game extends React.Component {
       }],
       xIsNext: true,
       stepNumber: 0,
+      isAsc: true,
     };
   }
   handleClick(i) {
@@ -64,12 +65,24 @@ class Game extends React.Component {
       xIsNext: (step % 2) ? false : true,
     });
   }
+  onChangeIsAsc(val) {
+    this.setState({
+      isAsc: val
+    });
+  }
   render() {
     const history = this.state.history;
     const current = history[this.state.stepNumber];
     const winner = calculateWinner(current.squares);
-    const moves = history.map((obj, step) => {
-      const desc = step ? 'Move (' + obj.posX + ',' + obj.posY + ')' :'Game start';
+    
+    let history_disp = history.slice();
+    let order = "";
+    if (!this.state.isAsc) {
+      history_disp = history_disp.reverse();
+      order = "reversed";
+    }
+    const moves = history_disp.map((obj, step) => {
+      const desc = obj.posX != -1 ? 'Move (' + obj.posX + ',' + obj.posY + ')' :'Game Start';
       const bold = this.state.stepNumber == step ? {fontWeight: 'bold'} : {fontWeight: 'normal'};
       return (
         <li key={step} style={bold}>
@@ -95,7 +108,11 @@ class Game extends React.Component {
         </div>
         <div className="game-info">
           <div>{status}</div>
-          <ol>{moves}</ol>
+          <div>
+            <input type="radio" name="order" onChange={() => this.onChangeIsAsc(true)} defaultChecked />Asc
+            <input type="radio" name="order" onChange={() => this.onChangeIsAsc(false)} />Desc
+          </div>
+          <ol reversed={order}>{moves}</ol>
         </div>
       </div>
     );
