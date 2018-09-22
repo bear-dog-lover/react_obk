@@ -13,12 +13,13 @@ import * as reducers from './reducers';
 
 // historyはsrc/index.jsから渡すようにする
 export default function createStore(history) {
+  const combinedReducers = combineReducers({
+    ...reducers,
+    // react-router-reduxのReducer
+    router: routerReducer
+  });
   return reduxCreateStore(
-    combineReducers({
-      ...reducers,
-      // react-router-reduxのReducer
-      router: routerReducer
-    }),
+    combinedReducers,
     applyMiddleware(
       logger,
       thunk,
