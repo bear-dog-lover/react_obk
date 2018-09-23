@@ -1,5 +1,5 @@
 import React from 'react';
-import { render } from 'react-dom';
+import { hydrate } from 'react-dom';
 import { Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'react-router-redux';
@@ -14,7 +14,7 @@ const history = createBrowserHistory();
 // Storeの生成
 const store = createStore(history);
 
-render(
+hydrate(
   <Provider store={store}>
     <ConnectedRouter history={history}>
       <div>
