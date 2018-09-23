@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "lib": ["es6"],
+    "outDir": "./dist/",
+    "sourceMap": true,
+    "noImplicitAny": true,
+    "module": "commonjs",
+    "target": "es5",
+    "jsx": "react",
+    "declaration": true, /* Generates corresponding '.d.ts' file. */
+    "composite": true    /* Enable project compilation */
+  },
+  "include": [
+    "./src/**/*"
+  ]
+}
