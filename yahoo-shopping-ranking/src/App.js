@@ -25,7 +25,13 @@ class App extends Component {
         
         <Nav />
         
-        {/* Switchってなんだよ */}
+        {/*
+          react-router-dom内でreact-routerのSwitchを呼び出している
+          react-router v4の新機能
+          参考：https://qiita.com/park-jh/items/b4c7b16ea9eb0cf44942
+          urlにマッチしたいずれかのRouteを表示するためのおまじない
+          v3ではデフォルトでいずれかが表示されるが、v4ではSwitchが無ければurlにマッチするすべてのRouteがレンダリングされる
+        */}
         <div style={{ marginTop: 64, padding: 32 }}>
           <Switch>
             <Route path="/all" component={Ranking} />
